@@ -8,14 +8,15 @@ import (
 	"sync/atomic"
 	"time"
 
-	toml "github.com/pelletier/go-toml/v2"
+	"github.com/pelletier/go-toml/v2"
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 	log "github.com/xlab/suplog"
 
-	"github.com/InjectiveLabs/injective-price-oracle/pipeline"
 	"github.com/InjectiveLabs/metrics"
 	oracletypes "github.com/InjectiveLabs/sdk-go/chain/oracle/types"
+
+	"github.com/InjectiveLabs/injective-price-oracle/pipeline"
 )
 
 type DynamicFeedConfig struct {
@@ -195,14 +196,12 @@ func (f *dynamicPriceFeed) PullPrice(ctx context.Context) (
 	}
 
 	if finalResult.HasFatalErrors() {
-		err = errors.Errorf("final run result has fatal errors: %v", finalResult.FatalErrors)
-		return zeroPrice, err
+		return zeroPrice, errors.Errorf("final run result has fatal errors: %v", finalResult.FatalErrors)
 	}
 
 	res, err := finalResult.SingularResult()
 	if err != nil {
-		err = errors.Wrap(err, "failed to get single result of pipeline run")
-		return zeroPrice, err
+		return zeroPrice, errors.Wrap(err, "failed to get single result of pipeline run")
 	}
 
 	price, ok := res.Value.(decimal.Decimal)

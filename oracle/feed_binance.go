@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
@@ -123,14 +122,14 @@ func (f *binancePriceFeed) PullPrice(ctx context.Context) (
 		return zeroPrice, err
 	}
 
-	respBody, err := ioutil.ReadAll(io.LimitReader(resp.Body, maxRespBytes))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxRespBytes))
 	if err != nil {
 		metrics.ReportFuncError(f.svcTags)
 		_ = resp.Body.Close()
 		err = errors.Wrapf(err, "failed to read response body from %s", reqURL)
 		return zeroPrice, err
 	}
-	_ = resp.Body.Close()
+	defer resp.Body.Close()
 
 	var priceResp binancePriceResp
 	if err = json.Unmarshal(respBody, &priceResp); err != nil {

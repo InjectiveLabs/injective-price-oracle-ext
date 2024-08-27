@@ -136,6 +136,7 @@ func initExternalFeedsOptions(
 	cmd *cli.Cmd,
 	binanceBaseURL **string,
 	dynamicFeedsDir **string,
+	storkFeedsDir **string,
 ) {
 	*binanceBaseURL = cmd.String(cli.StringOpt{
 		Name:   "binance-url",
@@ -147,6 +148,11 @@ func initExternalFeedsOptions(
 		Name:   "dynamic-feeds",
 		Desc:   "Path to dynamic feeds configuration files in TOML format",
 		EnvVar: "ORACLE_DYNAMIC_FEEDS_DIR",
+	})
+	*storkFeedsDir = cmd.String(cli.StringOpt{
+		Name:   "stork-feeds",
+		Desc:   "Path to stork feeds configuration files in TOML format",
+		EnvVar: "ORACLE_STORK_FEEDS_DIR",
 	})
 }
 
@@ -192,5 +198,22 @@ func initStatsdOptions(
 		Desc:   "Force disabling statsd reporting completely.",
 		EnvVar: "ORACLE_STATSD_DISABLED",
 		Value:  "true",
+	})
+}
+
+func initStorkOracleWebSocket(
+	cmd *cli.Cmd,
+	websocketUrl    **string,
+	websocketHeader **string,
+) {
+	*websocketUrl = cmd.String(cli.StringOpt{
+		Name: "websocket-url",
+		Desc: "Stork websocket URL",
+		EnvVar: "STORK_WEBSOCKET_URL",
+	})
+	*websocketHeader = cmd.String(cli.StringOpt{
+		Name: "websocket header",
+		Desc: "Stork websocket header",
+		EnvVar: "STORK_WEBSOCKET_HEADER",
 	})
 }

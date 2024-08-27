@@ -2,12 +2,16 @@ module github.com/InjectiveLabs/injective-price-oracle
 
 go 1.22
 
+toolchain go1.22.4
+
 require (
+	cosmossdk.io/math v1.3.0
 	github.com/InjectiveLabs/metrics v0.0.10
 	github.com/InjectiveLabs/sdk-go v1.51.0
 	github.com/cometbft/cometbft v0.38.9
 	github.com/cosmos/cosmos-sdk v0.50.7
 	github.com/ethereum/go-ethereum v1.11.5
+	github.com/gorilla/websocket v1.5.0
 	github.com/jawher/mow.cli v1.2.0
 	github.com/jpillora/backoff v1.0.0
 	github.com/mitchellh/mapstructure v1.5.0
@@ -30,7 +34,6 @@ require (
 	cosmossdk.io/depinject v1.0.0-alpha.4 // indirect
 	cosmossdk.io/errors v1.0.1 // indirect
 	cosmossdk.io/log v1.3.1 // indirect
-	cosmossdk.io/math v1.3.0 // indirect
 	cosmossdk.io/store v1.1.0 // indirect
 	cosmossdk.io/x/evidence v0.1.0 // indirect
 	cosmossdk.io/x/feegrant v0.1.0 // indirect
@@ -117,10 +120,9 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/handlers v1.5.2 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
-	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.11.3 // indirect
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0 // indirect
 	github.com/gsterjov/go-libsecret v0.0.0-20161001094733-a6f4afe4910c // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-hclog v1.5.0 // indirect
